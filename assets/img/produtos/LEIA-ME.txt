@@ -1,0 +1,23 @@
+FOTOS DOS VEÍCULOS — Z&L Cars
+================================
+
+Cada veículo usa uma pasta com o ID do produto no banco:
+
+  assets/img/produtos/{ID_PRODUTO}/1.jpg
+  assets/img/produtos/{ID_PRODUTO}/2.jpg
+  assets/img/produtos/{ID_PRODUTO}/3.jpg
+  ...
+
+O site exibe todas as fotos em carrossel (setas + bolinhas).
+
+Exemplo — Onix 2024 (ID 13):
+  assets/img/produtos/13/1.jpg
+  assets/img/produtos/13/2.jpg
+  ...
+
+Para adicionar fotos de um veículo novo:
+1. Descubra o ID_PRODUTO no banco de dados
+2. Crie a pasta assets/img/produtos/{ID}/
+3. Coloque as fotos numeradas: 1.jpg, 2.jpg, 3.jpg …
+
+Formatos aceitos: jpg, jpeg, png, webp

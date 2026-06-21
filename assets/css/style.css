@@ -27,20 +27,21 @@
 
 /* ── Variáveis (Dark) ──────────────────────────────── */
 [data-theme="dark"] {
+    color-scheme: dark;
     --bg:           #0d1a0f;
     --surface:      #142117;
     --surface-2:    #1a2e1d;
     --border:       #2a4a2d;
-    --text:         #e0ede1;
-    --text-muted:   #89ab8c;
+    --text:         #ffffff;
+    --text-muted:   #ffffff;
     --green:        #4caf50;
     --green-dark:   #2e7d32;
     --green-light:  #1b3a1e;
     --green-accent: #66bb6a;
     --nav-bg:       #0a140b;
-    --nav-text:     #c8e6c9;
+    --nav-text:     #ffffff;
     --footer-bg:    #081009;
-    --footer-text:  #a5c8a7;
+    --footer-text:  #ffffff;
     --card-shadow:  0 2px 16px rgba(0,0,0,0.4);
 }
 
@@ -215,7 +216,44 @@ a:hover { color: var(--green-accent); }
 }
 .card-custom .card-body { padding: 1.4rem; }
 .card-custom .card-title { font-family: 'Oswald', sans-serif; font-size: 1.25rem; color: var(--text); }
-.card-img-top { height: 200px; object-fit: cover; }
+.card-img-top { height: 200px; object-fit: cover; width: 100%; }
+.card-carousel { position: relative; }
+.card-carousel .carousel-inner { border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; }
+.card-carousel .carousel-indicators {
+    margin-bottom: .35rem;
+}
+.card-carousel .carousel-indicators [data-bs-target] {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,.6);
+    border: none;
+    margin: 0 3px;
+}
+.card-carousel .carousel-indicators .active {
+    background-color: var(--green);
+}
+.card-carousel .carousel-control-prev,
+.card-carousel .carousel-control-next {
+    width: 12%;
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+.card-custom:hover .card-carousel .carousel-control-prev,
+.card-custom:hover .card-carousel .carousel-control-next {
+    opacity: 1;
+}
+.card-carousel .carousel-control-prev-icon,
+.card-carousel .carousel-control-next-icon {
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,.5));
+}
+.cart-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
 .card-placeholder {
     height: 200px;
     background: var(--green-light);
@@ -334,6 +372,84 @@ a:hover { color: var(--green-accent); }
 .page-wrapper { flex: 1; padding: 2.5rem 0; }
 .price-tag { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--green); font-weight: 700; }
 .alert { border-radius: var(--radius); }
+
+/* ── Dark Mode — ajustes globais ───────────────────── */
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] .text-body-secondary,
+[data-theme="dark"] small.text-muted {
+    color: #ffffff !important;
+    opacity: 0.92;
+}
+
+[data-theme="dark"] .breadcrumb-item,
+[data-theme="dark"] .breadcrumb-item.active {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] .accordion-item,
+[data-theme="dark"] .accordion-button,
+[data-theme="dark"] .accordion-body {
+    background-color: var(--surface) !important;
+    color: #ffffff !important;
+    border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+    background-color: var(--surface-2) !important;
+    color: #ffffff !important;
+    box-shadow: none;
+}
+
+[data-theme="dark"] .accordion-button::after {
+    filter: invert(1);
+}
+
+[data-theme="dark"] .badge.bg-light,
+[data-theme="dark"] .badge.bg-light.text-dark {
+    background-color: var(--surface-2) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .badge.bg-secondary {
+    background-color: #2a4a2d !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .alert-warning {
+    background-color: #3d3200;
+    border-color: #665500;
+    color: #ffffff;
+}
+
+[data-theme="dark"] .alert-success {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .alert-danger {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .alert-link {
+    color: var(--green-accent);
+}
+
+[data-theme="dark"] .contact-card,
+[data-theme="dark"] .contact-card h6 {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .cat-card:hover {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .table-custom tbody tr:hover {
+    color: #ffffff;
+}
 
 @media (max-width: 768px) {
     .hero-section { padding: 50px 0 40px; }

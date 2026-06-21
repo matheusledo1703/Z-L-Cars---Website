@@ -1,4 +1,12 @@
 <?php
+// Evita erro de session já iniciada
+function session_start_safe() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+}
+session_start_safe();
+
 // Define a raiz do projeto para paths relativos
 $root = str_repeat('../', $depth ?? 0);
 ?>
@@ -17,6 +25,17 @@ $root = str_repeat('../', $depth ?? 0);
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- CSS próprio -->
     <link rel="stylesheet" href="<?= $root ?>assets/css/style.css">
+    <script>
+    (function () {
+        try {
+            var theme = localStorage.getItem('zlcars-theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        } catch (e) {}
+    })();
+    </script>
+    <script>window.ZLCARS_BASE = <?= json_encode($root) ?>;</script>
 </head>
 <body>
 
@@ -79,12 +98,4 @@ $root = str_repeat('../', $depth ?? 0);
     </div>
 </nav>
 
-<?php
-// Evita erro de session já iniciada
-function session_start_safe() {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-}
-session_start_safe();
-?>
+

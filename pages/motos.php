@@ -7,7 +7,7 @@ require_once '../includes/db.php';
 require_once '../functions/functions.php';
 
 $conn     = conectarBD();
-$veiculos = buscarVeiculosPorCategoria($conn, 'moto');
+$veiculos = buscarVeiculosPorCategoria($conn, 'MOTO');
 $conn->close();
 
 $termoBusca = trim($_GET['busca'] ?? '');
@@ -31,9 +31,9 @@ if ($termoBusca !== '') {
         <div class="form-section mb-4">
             <form method="GET" class="row g-3 align-items-end">
                 <div class="col-md-8">
-                    <label class="form-label">Buscar por modelo</label>
+                    <label class="form-label">Buscar por marca ou modelo</label>
                     <input type="text" name="busca" class="form-control"
-                           placeholder="Ex: Honda, Yamaha..." value="<?= htmlspecialchars($termoBusca) ?>">
+                           placeholder="Ex: Honda, Bros..." value="<?= htmlspecialchars($termoBusca) ?>">
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-green w-100">
@@ -50,34 +50,10 @@ if ($termoBusca !== '') {
         </div>
         <?php else: ?>
         <div class="row g-4">
-            <?php foreach ($veiculos as $v): ?>
-            <div class="col-md-4 col-sm-6">
-                <div class="card-custom h-100">
-                    <div class="card-placeholder"><i class="bi bi-bicycle"></i></div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title"><?= htmlspecialchars($v['nome']) ?></h5>
-                        <div class="d-flex gap-2 mb-2 flex-wrap">
-                            <?php if (!empty($v['ano'])): ?>
-                            <span class="badge bg-secondary"><?= htmlspecialchars($v['ano']) ?></span>
-                            <?php endif; ?>
-                            <?php if (!empty($v['km'])): ?>
-                            <span class="badge" style="background:var(--green-light);color:var(--green);">
-                                <?= number_format($v['km'], 0, ',', '.') ?> km
-                            </span>
-                            <?php endif; ?>
-                        </div>
-                        <p class="text-muted small flex-grow-1"><?= htmlspecialchars($v['descricao'] ?? '') ?></p>
-                        <div class="price-tag mb-3 mt-auto">
-                            <?= $v['preco'] ? formatarMoeda(floatval($v['preco'])) : 'Consultar' ?>
-                        </div>
-                        <button class="btn btn-green w-100"
-                            onclick="adicionarAoCarrinho(<?= $v['id'] ?>, '<?= htmlspecialchars(addslashes($v['nome'])) ?>', '<?= $v['preco'] ?>')">
-                            <i class="bi bi-cart-plus me-1"></i> Adicionar ao Carrinho
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
+            <?php foreach ($veiculos as $v):
+                $icone = 'bi-bicycle';
+                require '../includes/card-veiculo.php';
+            endforeach; ?>
         </div>
         <?php endif; ?>
     </div>

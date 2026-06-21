@@ -13,31 +13,31 @@ require_once '../includes/header.php';
         <!-- Bootstrap: 4 cards de contato -->
         <div class="row g-4 mb-5">
             <div class="col-md-3 col-sm-6">
-                <a href="mailto:contato@zlcars.com.br" class="contact-card text-decoration-none d-block">
+                <a href="mailto:henriquezufa@gmail.com" class="contact-card text-decoration-none d-block">
                     <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
                     <h6 style="font-family:'Oswald',sans-serif;font-size:1rem;">E-mail</h6>
-                    <small class="text-muted">contato@zlcars.com.br</small>
+                    <small class="text-muted">henriquezufa@gmail.com</small>
                 </a>
             </div>
             <div class="col-md-3 col-sm-6">
-                <a href="https://wa.me/5500000000000" target="_blank" class="contact-card text-decoration-none d-block">
+                <a href="https://wa.me/5544997555905" target="_blank" class="contact-card text-decoration-none d-block">
                     <div class="contact-icon"><i class="bi bi-whatsapp"></i></div>
                     <h6 style="font-family:'Oswald',sans-serif;font-size:1rem;">WhatsApp</h6>
-                    <small class="text-muted">(00) 00000-0000</small>
+                    <small class="text-muted">(44) 99755-5905</small>
                 </a>
             </div>
             <div class="col-md-3 col-sm-6">
-                <a href="https://instagram.com/zlcars" target="_blank" class="contact-card text-decoration-none d-block">
+                <a href="https://instagram.com/z.l.cars" target="_blank" class="contact-card text-decoration-none d-block">
                     <div class="contact-icon"><i class="bi bi-instagram"></i></div>
                     <h6 style="font-family:'Oswald',sans-serif;font-size:1rem;">Instagram</h6>
-                    <small class="text-muted">@zlcars</small>
+                    <small class="text-muted">@z.l.cars</small>
                 </a>
             </div>
             <div class="col-md-3 col-sm-6">
-                <a href="https://facebook.com/zlcars" target="_blank" class="contact-card text-decoration-none d-block">
+                <a href="https://www.facebook.com/profile.php?viewas=&id=61590477308188&show_switched_toast=false&show_switched_tooltip=false&is_tour_dismissed=false&is_tour_completed=false&show_podcast_settings=false&show_community_review_changes=false&should_open_composer=false&badge_type=NEW_MEMBER&show_community_rollback_toast=false&show_community_rollback=false&show_follower_visibility_disclosure=false&bypass_exit_warning=true" target="_blank" class="contact-card text-decoration-none d-block">
                     <div class="contact-icon"><i class="bi bi-facebook"></i></div>
                     <h6 style="font-family:'Oswald',sans-serif;font-size:1rem;">Facebook</h6>
-                    <small class="text-muted">/zlcars</small>
+                    <small class="text-muted">Z&L Cars</small>
                 </a>
             </div>
         </div>
@@ -49,9 +49,9 @@ require_once '../includes/header.php';
                     <h5 class="mb-3" style="font-family:'Oswald',sans-serif;">
                         <i class="bi bi-geo-alt text-success me-2"></i>Endereço
                     </h5>
-                    <p class="mb-1">Av. das Indústrias, 1500 — Centro</p>
-                    <p class="mb-1 text-muted">Sua Cidade — Estado</p>
-                    <p class="mb-0 text-muted">CEP 00000-000</p>
+                    <p class="mb-1">Rua Araribóia, 114, Centro</p>
+                    <p class="mb-1 text-muted">Corumbataí do Sul - PR</p>
+                    <p class="mb-0 text-muted">CEP 86.970-225</p>
                 </div>
             </div>
             <div class="col-md-6">

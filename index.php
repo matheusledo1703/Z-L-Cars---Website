@@ -65,14 +65,14 @@ require_once 'functions/functions.php';
                 <h2 class="section-title">Nossa Localização</h2>
                 <div class="info-card">
                     <p class="mb-2"><i class="bi bi-geo-alt-fill text-success me-2"></i>
-                        <strong>Endereço:</strong> Av. das Indústrias, 1500 — Centro<br>
-                        <small class="text-muted ms-4">Sua Cidade — Estado, CEP 00000-000</small>
+                        <strong>Endereço:</strong> Rua Araribóia, 114, Centro<br>
+                        <small class="text-muted ms-4">Corumbataí do Sul - PR, 86.970-225</small>
                     </p>
                     <p class="mb-2"><i class="bi bi-clock-fill text-success me-2"></i>
                         <strong>Horário:</strong> Seg a Sex: 08h–18h | Sáb: 08h–13h
                     </p>
                     <p class="mb-0"><i class="bi bi-telephone-fill text-success me-2"></i>
-                        <strong>Telefone:</strong> (00) 00000-0000
+                        <strong>Telefone:</strong> (44) 99755-5905
                     </p>
                 </div>
             </div>
@@ -101,28 +101,16 @@ require_once 'functions/functions.php';
         <!-- Destaques do banco -->
         <?php
         $conn = conectarBD();
-        $veiculos = buscarVeiculosPorCategoria($conn, 'carro');
+        $veiculos = buscarVeiculosPorCategoria($conn, 'CARRO');
         $conn->close();
         if (!empty($veiculos)):
         ?>
         <h2 class="section-title">Destaques — Carros</h2>
         <div class="row g-4">
-            <?php foreach (array_slice($veiculos, 0, 3) as $v): ?>
-            <div class="col-md-4">
-                <div class="card-custom h-100">
-                    <div class="card-placeholder"><i class="bi bi-car-front"></i></div>
-                    <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($v['nome']) ?></h5>
-                        <p class="text-muted small mb-2"><?= htmlspecialchars($v['ano'] ?? '') ?> · <?= htmlspecialchars($v['km'] ?? '') ?> km</p>
-                        <div class="price-tag mb-3"><?= $v['preco'] ? formatarMoeda(floatval($v['preco'])) : 'Consultar' ?></div>
-                        <button class="btn btn-green w-100"
-                            onclick="adicionarAoCarrinho(<?= $v['id'] ?>, '<?= htmlspecialchars($v['nome']) ?>', '<?= $v['preco'] ?>')">
-                            <i class="bi bi-cart-plus me-1"></i> Adicionar
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
+            <?php foreach (array_slice($veiculos, 0, 3) as $v):
+                $icone = 'bi-car-front';
+                require 'includes/card-veiculo.php';
+            endforeach; ?>
         </div>
         <?php endif; ?>
 

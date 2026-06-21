@@ -7,12 +7,35 @@ if (isset($_GET['action'])) {
     header('Content-Type: application/json');
 
     if ($_GET['action'] === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-        $item = [
-            'id'    => intval($_POST['id']    ?? 0),
-            'nome'  => htmlspecialchars(trim($_POST['nome']  ?? '')),
-            'preco' => floatval($_POST['preco'] ?? 0),
-        ];
-        if (!isset($_SESSION['carrinho'])) $_SESSION['carrinho'] = [];
+        $marca  = trim($_POST['marca']  ?? '');
+        $modelo = trim($_POST['modelo'] ?? '');
+        $nome   = trim($_POST['nome']   ?? '');
+
+        if ($nome === '') {
+            $nome = trim($marca . ' ' . $modelo);
+        }
+
+        $item = normalizarItemCarrinho([
+            'id'     => intval($_POST['id'] ?? 0),
+            'nome'   => $nome,
+            'marca'  => $marca,
+            'modelo' => $modelo,
+            'ano'    => intval($_POST['ano'] ?? 0),
+            'cor'       => trim($_POST['cor'] ?? ''),
+            'descricao' => trim($_POST['descricao'] ?? ''),
+            'valor'     => floatval($_POST['valor'] ?? 0),
+            'foto'      => trim($_POST['foto'] ?? ''),
+        ]);
+
+        if ($item['id'] <= 0 || $item['nome'] === '') {
+            echo json_encode(['success' => false, 'mensagem' => 'Veículo inválido.']);
+            exit;
+        }
+
+        if (!isset($_SESSION['carrinho'])) {
+            $_SESSION['carrinho'] = [];
+        }
+
         $_SESSION['carrinho'][] = $item;
         echo json_encode(['success' => true, 'quantidade' => count($_SESSION['carrinho'])]);
         exit;
@@ -43,9 +66,10 @@ $depth = 1;
 $pageTitle = 'Z&L Cars — Carrinho';
 $currentPage = 'carrinho';
 
-$carrinho = $_SESSION['carrinho'] ?? [];
-$conta    = $_SESSION['conta']    ?? [];
-$total    = calcularTotalCarrinho($carrinho);
+$carrinho = array_map('normalizarItemCarrinho', $_SESSION['carrinho'] ?? []);
+$_SESSION['carrinho'] = $carrinho;
+$totalCarrinho = calcularTotalCarrinho($carrinho);
+$conta         = $_SESSION['conta'] ?? [];
 
 require_once '../includes/header.php';
 ?>
@@ -74,7 +98,7 @@ require_once '../includes/header.php';
                         <thead>
                             <tr>
                                 <th>Veículo</th>
-                                <th class="text-end">Preço</th>
+                                <th class="text-end">Valor</th>
                                 <th class="text-center">Remover</th>
                             </tr>
                         </thead>
@@ -82,11 +106,34 @@ require_once '../includes/header.php';
                             <?php foreach ($carrinho as $i => $item): ?>
                             <tr>
                                 <td>
-                                    <i class="bi bi-car-front text-success me-2"></i>
-                                    <?= htmlspecialchars($item['nome']) ?>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <?php
+                                        $fotoItem = urlFotoVeiculo($item['foto'] ?? null, $root ?? '../');
+                                        if ($fotoItem):
+                                        ?>
+                                        <img src="<?= htmlspecialchars($fotoItem) ?>" alt="" class="cart-thumb">
+                                        <?php else: ?>
+                                        <i class="bi bi-car-front text-success"></i>
+                                        <?php endif; ?>
+                                        <div>
+                                            <?= htmlspecialchars($item['nome']) ?>
+                                            <?php if (!empty($item['ano']) || !empty($item['cor'])): ?>
+                                            <small class="text-muted d-block">
+                                                <?php if (!empty($item['ano'])): ?>
+                                                <?= (int) $item['ano'] ?>
+                                                <?php endif; ?>
+                                                <?php if (!empty($item['cor'])): ?>
+                                                <?= !empty($item['ano']) ? ' · ' : '' ?><?= htmlspecialchars($item['cor']) ?>
+                                                <?php endif; ?>
+                                            </small>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="text-end price-tag">
-                                    <?= $item['preco'] ? formatarMoeda($item['preco']) : 'Consultar' ?>
+                                    <?= $item['valor'] > 0
+                                        ? formatarMoeda($item['valor'])
+                                        : 'Consultar' ?>
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-outline-danger"
@@ -122,7 +169,11 @@ require_once '../includes/header.php';
                     </div>
                     <div class="d-flex justify-content-between mb-3 border-top pt-2">
                         <strong>Total estimado:</strong>
-                        <strong class="price-tag"><?= formatarMoeda($total) ?></strong>
+                        <strong class="price-tag">
+                            <?= $totalCarrinho > 0
+                                ? formatarMoeda($totalCarrinho)
+                                : 'Consultar' ?>
+                        </strong>
                     </div>
 
                     <?php if (empty($conta)): ?>
