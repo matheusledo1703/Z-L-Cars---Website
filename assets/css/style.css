@@ -1,0 +1,341 @@
+/* ============================================================
+   Z&L CARS — style.css
+   Tema: Neutro com acento verde | Dark Mode: verde escuro
+   Fontes: Oswald (títulos) + Lato (corpo)
+   ============================================================ */
+
+/* ── Variáveis (Light) ─────────────────────────────── */
+:root {
+    --bg:           #f5f5f0;
+    --surface:      #ffffff;
+    --surface-2:    #f0f0eb;
+    --border:       #ddd;
+    --text:         #1a1a1a;
+    --text-muted:   #666;
+    --green:        #2d7a3a;
+    --green-dark:   #1e5429;
+    --green-light:  #e8f5e9;
+    --green-accent: #43a554;
+    --nav-bg:       #1a1a1a;
+    --nav-text:     #e8e8e0;
+    --footer-bg:    #111;
+    --footer-text:  #ccc;
+    --card-shadow:  0 2px 12px rgba(0,0,0,0.08);
+    --radius:       10px;
+    --transition:   0.25s ease;
+}
+
+/* ── Variáveis (Dark) ──────────────────────────────── */
+[data-theme="dark"] {
+    --bg:           #0d1a0f;
+    --surface:      #142117;
+    --surface-2:    #1a2e1d;
+    --border:       #2a4a2d;
+    --text:         #e0ede1;
+    --text-muted:   #89ab8c;
+    --green:        #4caf50;
+    --green-dark:   #2e7d32;
+    --green-light:  #1b3a1e;
+    --green-accent: #66bb6a;
+    --nav-bg:       #0a140b;
+    --nav-text:     #c8e6c9;
+    --footer-bg:    #081009;
+    --footer-text:  #a5c8a7;
+    --card-shadow:  0 2px 16px rgba(0,0,0,0.4);
+}
+
+/* ── Reset & Base ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+a { color: var(--green); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--green-accent); }
+
+/* ── Navbar ────────────────────────────────────────── */
+.navbar-custom {
+    background-color: var(--nav-bg) !important;
+    border-bottom: 3px solid var(--green);
+    padding: 0.6rem 0;
+    transition: background-color var(--transition);
+}
+
+.navbar-brand { display: flex; align-items: baseline; gap: 3px; }
+.brand-zl {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--green-accent);
+    letter-spacing: 1px;
+}
+.brand-cars {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--nav-text);
+    letter-spacing: 3px;
+}
+
+.navbar-custom .nav-link {
+    color: var(--nav-text) !important;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    transition: background var(--transition), color var(--transition);
+}
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+    background-color: var(--green);
+    color: #fff !important;
+}
+
+.cart-badge {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    font-size: 0.65rem;
+    padding: 2px 5px;
+}
+
+.btn-dark-toggle {
+    background: transparent;
+    border: 2px solid var(--green);
+    color: var(--green-accent);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all var(--transition);
+    padding: 0;
+}
+.btn-dark-toggle:hover { background: var(--green); color: #fff; }
+
+.navbar-toggler { border-color: var(--green); }
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%2343a554' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ── Hero ──────────────────────────────────────────── */
+.hero-section {
+    background: linear-gradient(135deg, var(--nav-bg) 0%, var(--green-dark) 100%);
+    color: #fff;
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+}
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.02) 40px,rgba(255,255,255,.02) 80px);
+}
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+.hero-title span { color: var(--green-accent); }
+.hero-subtitle { font-size: 1.1rem; opacity: 0.85; max-width: 520px; }
+.btn-hero {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    border-radius: var(--radius);
+    transition: all var(--transition);
+}
+.btn-hero:hover {
+    background: var(--green-accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(67,165,84,.35);
+}
+
+/* ── Sections ──────────────────────────────────────── */
+.section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    margin-bottom: 2rem;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 50px; height: 3px;
+    background: var(--green);
+    border-radius: 2px;
+}
+
+/* ── Cards ─────────────────────────────────────────── */
+.card-custom {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    overflow: hidden;
+}
+.card-custom:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.14);
+    border-color: var(--green);
+}
+.card-custom .card-body { padding: 1.4rem; }
+.card-custom .card-title { font-family: 'Oswald', sans-serif; font-size: 1.25rem; color: var(--text); }
+.card-img-top { height: 200px; object-fit: cover; }
+.card-placeholder {
+    height: 200px;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--green);
+}
+
+/* ── Botões ────────────────────────────────────────── */
+.btn-green {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    transition: all var(--transition);
+}
+.btn-green:hover { background: var(--green-dark); color: #fff; transform: translateY(-1px); }
+
+.btn-outline-green {
+    border: 2px solid var(--green);
+    color: var(--green);
+    background: transparent;
+    border-radius: var(--radius);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    transition: all var(--transition);
+}
+.btn-outline-green:hover { background: var(--green); color: #fff; }
+
+/* ── Categoria cards ───────────────────────────────── */
+.cat-card {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-decoration: none;
+    display: block;
+    color: var(--text);
+}
+.cat-card:hover {
+    border-color: var(--green);
+    background: var(--green-light);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(45,122,58,.15);
+    color: var(--text);
+}
+.cat-icon { font-size: 3.5rem; color: var(--green); margin-bottom: 1rem; display: block; }
+.cat-title { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── Tabela Carrinho ───────────────────────────────── */
+.table-custom { background: var(--surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.table-custom thead { background: var(--green); color: #fff; font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+.table-custom tbody tr { border-color: var(--border); color: var(--text); background: var(--surface); transition: background var(--transition); }
+.table-custom tbody tr:hover { background: var(--green-light); }
+
+/* ── Formulário ────────────────────────────────────── */
+.form-section {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+}
+.form-control, .form-select {
+    background: var(--surface-2) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+    border-radius: 7px !important;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--green) !important;
+    box-shadow: 0 0 0 3px rgba(67,165,84,.15) !important;
+}
+.form-label { font-weight: 700; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: .5px; }
+
+/* ── Contatos ──────────────────────────────────────── */
+.contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    text-align: center;
+    transition: all var(--transition);
+}
+.contact-card:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+.contact-icon { font-size: 2.5rem; color: var(--green); margin-bottom: .75rem; }
+
+/* ── Info Cards ────────────────────────────────────── */
+.info-card {
+    background: var(--surface);
+    border-left: 4px solid var(--green);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+}
+.info-icon { font-size: 2rem; color: var(--green); }
+
+/* ── Footer ────────────────────────────────────────── */
+.footer-custom {
+    background: var(--footer-bg);
+    border-top: 3px solid var(--green);
+    margin-top: auto;
+}
+.footer-tagline { color: var(--footer-text); font-size: .8rem; }
+.footer-social { color: var(--footer-text); font-size: 1.4rem; margin-left: 14px; transition: color var(--transition); }
+.footer-social:hover { color: var(--green-accent); }
+
+/* ── Misc ──────────────────────────────────────────── */
+.page-wrapper { flex: 1; padding: 2.5rem 0; }
+.price-tag { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--green); font-weight: 700; }
+.alert { border-radius: var(--radius); }
+
+@media (max-width: 768px) {
+    .hero-section { padding: 50px 0 40px; }
+    .cat-card { padding: 1.5rem 1rem; }
+}
